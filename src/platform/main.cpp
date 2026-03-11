@@ -19,7 +19,7 @@ int main() {
     rlImGuiSetup(true);
     ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    io.FontGlobalScale = 2;
+    io.FontGlobalScale = 1;
     ImGui::StyleColorsClassic();
     std::cout << "working";
 
