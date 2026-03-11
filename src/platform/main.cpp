@@ -15,6 +15,7 @@ int main() {
         std::cout << "Failed to initialize!" << std::endl;
         return 0;
     }
+
     rlImGuiSetup(true);
     ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
