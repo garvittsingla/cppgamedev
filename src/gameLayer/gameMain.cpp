@@ -18,7 +18,7 @@ bool initGame() {
     assetManager.loadAll();
     generateWorld(gameData.gameMap);
 
-    gameData.camera.target = {450,250};
+    gameData.camera.target = {10,120};
     gameData.camera.rotation = 0.0f;
     gameData.camera.zoom = 1.0f;
 
@@ -36,6 +36,7 @@ bool updateGame() {
     if (IsKeyDown(KEY_RIGHT)) gameData.camera.target.x += 7.f  *deltaTime * CAMERA_SPEED;
     if (IsKeyDown(KEY_UP)) gameData.camera.target.y -= 7.f *deltaTime * CAMERA_SPEED;
     if (IsKeyDown(KEY_DOWN)) gameData.camera.target.y += 7.f * deltaTime * CAMERA_SPEED;
+    //if (IsKeyDown(KEY_DOWN) && IsKeyDown(KEY_W)) &gameData.camera.zoom += 7;
 
     Vector2 worldpos = GetScreenToWorld2D(GetMousePosition(), gameData.camera);
     int blockX = worldpos.x;
