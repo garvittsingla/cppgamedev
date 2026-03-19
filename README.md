@@ -31,4 +31,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE raylib imgui rlimgui fastNoiseSIMD
 ```
 
 2. We are using raylib as it lets us make a window, draw block in it and give us a camera , we use imgui as a library to draw UI elements making our debugging easy, to make a bridge between raylib and imgui
-3. To seperate the gamelogic and the main logic we made different folders , and make 3 function `startGame`,`updateGame` and `stopGame`. In raylib the code written inside the update game i.e. `(!WindowShouldClose){}` will be updated every frame
+3. To seperate the gamelogic and the 
+main logic we made different folders , and make 3 function `startGame`,`updateGame` and `stopGame`. In raylib the code written inside the update game i.e. `(!WindowShouldClose){}` will be updated every frame
+4. Now to add IMGUI we enabled ImGUI raylib extension and add that in the external libraries. We have to literally download the source code of library to use it after some time
+5. **Delta Time** -> If the game is running on some good computer, the fps will be more than the computer running less fps, to bring uniformity we take a factor and multiply it which is known as delta time which is calculated on the basis on the last 2 frames bringing uniformity accross games 
