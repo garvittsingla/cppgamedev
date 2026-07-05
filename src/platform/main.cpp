@@ -33,7 +33,6 @@ int main() {
         ImGui::PopStyleColor(2);
 
         if (!updateGame()) {
-            CloseWindow();
         }
 
         rlImGuiEnd();

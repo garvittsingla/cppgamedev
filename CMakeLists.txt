@@ -28,6 +28,10 @@ add_executable(${PROJECT_NAME} src/platform/main.cpp
         src/gameLayer/randomStuff.cpp
         src/gameLayer/worldGenerator.h
         src/gameLayer/worldGenerator.cpp
+        src/gameLayer/structure.cpp
+        src/gameLayer/structure.h
+        src/gameLayer/saveMap.h
+        src/gameLayer/saveMap.cpp
 )
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/platform")
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/gameLayer")
