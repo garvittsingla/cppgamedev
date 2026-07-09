@@ -7,6 +7,8 @@
 #include <iostream>
 #include <raylib.h>
 
+#include "structure.h"
+
 struct GameData {
   GameMap gameMap;
   Camera2D camera;
@@ -14,6 +16,8 @@ struct GameData {
 
   Vector2 selectionStart = {};
   Vector2 selectionEnd = {};
+
+  Structure copyStructure;
 } gameData;
 
 AssetManager assetManager;
@@ -37,7 +41,7 @@ bool updateGame() {
   if (deltaTime > 1.f / 5) {
     deltaTime = 1.f / 5;
   }
-  gameData.camera.offset = {GetScreenWidth() / 2.f, GetScreenHeight() / 2.f};
+  gameData.camera.offset = {GetScreenWidth() / 2.f,  GetScreenHeight() / 2.f};
   ClearBackground({135, 206, 235, 255});
   float CAMERA_SPEED = 1.0f;
   if (IsKeyDown(KEY_LEFT))
@@ -68,6 +72,22 @@ bool updateGame() {
   if (showimgui) {
     if (IsKeyPressed(KEY_ONE)) { gameData. selectionStart = Vector2{(float)blockX, (float)blockY}; }
     if (IsKeyPressed(KEY_TWO)) {gameData.selectionEnd = Vector2{(float)blockX, (float)blockY}; }
+    if (IsKeyPressed(KEY_THREE)) {
+      gameData.copyStructure.pasteIntoMap(gameData.gameMap,Vector2{(float)blockX,(float)blockY});
+    }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+      auto b = gameData.gameMap.getBlockSafe(blockX, blockY);
+      if (b) {
+        *b = {};}
+    }
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+      auto b = gameData.gameMap.getBlockSafe(blockX, blockY);
+      if (b) {
+        b->type = gameData.createiveSelectedBlock;
+      }
+    }
+
 
     if (gameData.selectionStart.x > gameData.selectionEnd.x)
       std::swap(gameData.selectionStart.x, gameData.selectionEnd.x);
@@ -115,7 +135,12 @@ bool updateGame() {
       ImGui::Begin("Game control");
       ImGui::SliderFloat("Camera zoom : ", &gameData.camera.zoom, 2, 150);
       ImGui::SliderFloat("Camera Speed : ", &CAMERA_SPEED, 5, 30);
+
+      if (ImGui::Button("copy")){
+        gameData.copyStructure.copyFromMap(gameData.gameMap,gameData.selectionStart,gameData.selectionEnd);
+      }
       ImGui::Separator();
+
 
       for (int i = 0; i < Block::BLOCKS_COUNT; i++) {
         auto atlas = getTextureAtlas(i, 0, 32, 32);
